@@ -25,10 +25,12 @@ namespace TaskSchedulerBusiness.Migrations
             modelBuilder.Entity("TaskSchedulerBusiness.Model.Task", b =>
                 {
                     b.Property<string>("HostName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("TaskName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -157,7 +159,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("HostName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("NewValue")
                         .IsRequired()
@@ -176,7 +179,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("TaskName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.HasKey("Id");
 
@@ -222,7 +226,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("HostName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("Idle_Time")
                         .IsRequired()
@@ -309,7 +314,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("TaskName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Task_To_Run")
                         .IsRequired()

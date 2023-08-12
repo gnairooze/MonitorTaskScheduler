@@ -32,7 +32,7 @@ namespace TaskSchedulerBusiness.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;TrustServerCertificate=True;");
         }
     }
 }
