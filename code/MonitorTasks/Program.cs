@@ -9,8 +9,8 @@ var configBuilder = new ConfigurationBuilder().AddJsonFile($"appsettings.json");
 var config = configBuilder.Build();
 
 //not working
-//var connectionString = config.GetConnectionString("MonitorTaskSchedulerDbConnection");
-var connectionString = "Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;";
+var connectionString = config.GetConnectionString("MonitorTaskSchedulerDbConnection");
+//var connectionString = "Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;";
 
 var dbOptions = new DbContextOptionsBuilder<MonitorTaskSchedulerDbContext>()
     .UseSqlServer(connectionString)
