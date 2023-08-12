@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TaskSchedulerBusiness.Data;
 
+var tasksFilePath = @"sched-tasks.csv";
+
 var configBuilder = new ConfigurationBuilder().AddJsonFile($"appsettings.json");
 
 var config = configBuilder.Build();
@@ -18,8 +20,9 @@ var dbOptions = new DbContextOptionsBuilder<MonitorTaskSchedulerDbContext>()
     .Options;
 
 TaskSchedulerBusiness.Manager.DbContext = new MonitorTaskSchedulerDbContext(dbOptions);
+TaskSchedulerBusiness.Manager.Delete(tasksFilePath);
 TaskSchedulerBusiness.Manager.DumpTasks();
-var tasks = TaskSchedulerBusiness.Manager.Load(@"sched-tasks.csv");
+var tasks = TaskSchedulerBusiness.Manager.Load(tasksFilePath);
 Console.WriteLine("Load result:");
 Console.WriteLine(tasks.Count);
 

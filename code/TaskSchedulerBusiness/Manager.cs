@@ -57,6 +57,11 @@ namespace TaskSchedulerBusiness
             process.Close();
         }
 
+        public static void Delete(string filePath) 
+        {
+            if (File.Exists(filePath)) File.Delete(filePath);
+        }
+
         public static List<Model.Task> Load(string filePath)
         {
             List<Model.Task> tasks = new();
