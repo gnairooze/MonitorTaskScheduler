@@ -174,6 +174,7 @@ namespace TaskSchedulerBusiness
                 savedTask.CopyFrom(task);
                 savedTask.Modified = DateTime.Now;
                 DbContext.Update(savedTask);
+                DbContext.SaveChanges();
 
                 foreach (var change in changes)
                 {
