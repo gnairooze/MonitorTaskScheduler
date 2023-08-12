@@ -136,13 +136,17 @@ namespace TaskSchedulerBusiness
             }
         }
 
-        public static void Save(Model.Task task)
+        public static bool Save(Model.Task task, out string message)
         {
+            message = string.Empty;
+
             if (DbContext == null)
             {
-                throw new Exception("DbContext is null");
+                message = "DbContext is null";
+                return false;
             }
 
+            //if tasks already saved before in db.
             if(DbContext.Tasks.Any(
                 x => x.TaskName == task.TaskName
                 && x.HostName == task.HostName
@@ -152,23 +156,42 @@ namespace TaskSchedulerBusiness
 
                 if(savedTask.Equals(task))
                 {
-                    return;
+                    message = "no changes since task last saved";
+                    return true;
+                }
+
+                bool comparisonSucceeded = TaskBase.CompareTasks(savedTask, task, false, out List<TaskChange> changes, out string comparisonMessage);
+
+                if (!comparisonSucceeded)
+                {
+                    message = comparisonMessage;
+                    return false;
                 }
 
                 TaskHistory history = new(savedTask);
-                DbContext.TasksHistory.Add(history);
-                DbContext.SaveChanges();
-
+                DbContext.TaskHistories.Add(history);
+                
                 savedTask.CopyFrom(task);
                 savedTask.Modified = DateTime.Now;
                 DbContext.Update(savedTask);
+
+                foreach (var change in changes)
+                {
+                    change.TaskHistoryId = history.Id;
+                    DbContext.TaskChanges.Add(change);
+                }
+
                 DbContext.SaveChanges();
-                return;
+                return true;
             }
 
             task.Modified = DateTime.Now;
             DbContext.Add(task);
             DbContext.SaveChanges();
+
+            return true;
         }
+
+        
     }
 }

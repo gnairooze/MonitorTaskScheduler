@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskSchedulerBusiness.Data;
 
@@ -11,9 +12,11 @@ using TaskSchedulerBusiness.Data;
 namespace TaskSchedulerBusiness.Migrations
 {
     [DbContext(typeof(MonitorTaskSchedulerDbContext))]
-    partial class MonitorTaskSchedulerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230812074052_AddTaskChanges")]
+    partial class AddTaskChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

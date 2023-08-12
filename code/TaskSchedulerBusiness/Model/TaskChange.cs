@@ -12,10 +12,11 @@ namespace TaskSchedulerBusiness.Model
     [Index(nameof(Created))]
     [Index(nameof(HostName))]
     [Index(nameof(TaskName))]
-    public class TaskChanges
+    public class TaskChange
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+        public long TaskHistoryId { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public string HostName { get; set; } = string.Empty;
         public string TaskName { get; set; } = string.Empty;

@@ -8,6 +8,7 @@ namespace TaskSchedulerBusiness.Model
 {
     public class TaskBase
     {
+        #region Properties
         public string HostName { get; set; } = string.Empty;
         public string TaskName { get; set; } = string.Empty;
         public string Next_Run_Time { get; set; } = string.Empty;
@@ -37,6 +38,7 @@ namespace TaskSchedulerBusiness.Model
         public string Repeat_Until_Duration { get; set; } = string.Empty;
         public string Repeat_Stop_If_Still_Running { get; set; } = string.Empty;
         public DateTime Modified { get; set; }
+        #endregion
 
         public override bool Equals(object? obj)
         {
@@ -124,6 +126,348 @@ namespace TaskSchedulerBusiness.Model
             Repeat_Until_Time = source.Repeat_Until_Time;
             Repeat_Until_Duration = source.Repeat_Until_Duration;
             Repeat_Stop_If_Still_Running = source.Repeat_Stop_If_Still_Running;
+        }
+
+        public static bool CompareTasks(Task source, Task target, bool includeModified, out List<TaskChange> changes, out string message)
+        {
+            changes = new();
+            message = string.Empty;
+
+            if (source.TaskName != target.TaskName
+                || source.HostName != target.HostName)
+            {
+                message = "source and destinations cannot be compared. TaskName or HostName are not equal";
+                return false;
+            }
+
+            if (source.Author != target.Author)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Author),
+                    OldValue = source.Author,
+                    NewValue = target.Author
+                });
+            }
+
+            if (source.Comment != target.Comment)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Comment),
+                    OldValue = source.Comment,
+                    NewValue = target.Comment
+                });
+            }
+
+            if (source.Days != target.Days)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Days),
+                    OldValue = source.Days,
+                    NewValue = target.Days
+                });
+            }
+
+            if (source.Delete_Task_If_Not_Rescheduled != target.Delete_Task_If_Not_Rescheduled)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Delete_Task_If_Not_Rescheduled),
+                    OldValue = source.Delete_Task_If_Not_Rescheduled,
+                    NewValue = target.Delete_Task_If_Not_Rescheduled
+                });
+            }
+
+            if (source.End_Date != target.End_Date)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.End_Date),
+                    OldValue = source.End_Date,
+                    NewValue = target.End_Date
+                });
+            }
+
+            if (source.Idle_Time != target.Idle_Time)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Idle_Time),
+                    OldValue = source.Idle_Time,
+                    NewValue = target.Idle_Time
+                });
+            }
+
+            if (source.Last_Result != target.Last_Result)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Last_Result),
+                    OldValue = source.Last_Result,
+                    NewValue = target.Last_Result
+                });
+            }
+
+            if (source.Last_Run_Time != target.Last_Run_Time)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Last_Run_Time),
+                    OldValue = source.Last_Run_Time,
+                    NewValue = target.Last_Run_Time
+                });
+            }
+
+            if (source.Logon_Mode != target.Logon_Mode)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Logon_Mode),
+                    OldValue = source.Logon_Mode,
+                    NewValue = target.Logon_Mode
+                });
+            }
+
+            if (source.Months != target.Months)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Months),
+                    OldValue = source.Months,
+                    NewValue = target.Months
+                });
+            }
+
+            if (source.Next_Run_Time != target.Next_Run_Time)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Next_Run_Time),
+                    OldValue = source.Next_Run_Time,
+                    NewValue = target.Next_Run_Time
+                });
+            }
+
+            if (source.Power_Management != target.Power_Management)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Power_Management),
+                    OldValue = source.Power_Management,
+                    NewValue = target.Power_Management
+                });
+            }
+
+            if (source.Repeat_Every != target.Repeat_Every)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Repeat_Every),
+                    OldValue = source.Repeat_Every,
+                    NewValue = target.Repeat_Every
+                });
+            }
+
+            if (source.Repeat_Stop_If_Still_Running != target.Repeat_Stop_If_Still_Running)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Repeat_Stop_If_Still_Running),
+                    OldValue = source.Repeat_Stop_If_Still_Running,
+                    NewValue = target.Repeat_Stop_If_Still_Running
+                });
+            }
+
+            if (source.Repeat_Until_Duration != target.Repeat_Until_Duration)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Repeat_Until_Duration),
+                    OldValue = source.Repeat_Until_Duration,
+                    NewValue = target.Repeat_Until_Duration
+                });
+            }
+
+            if (source.Repeat_Until_Time != target.Repeat_Until_Time)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Repeat_Until_Time),
+                    OldValue = source.Repeat_Until_Time,
+                    NewValue = target.Repeat_Until_Time
+                });
+            }
+
+            if (source.Run_As_User != target.Run_As_User)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Run_As_User),
+                    OldValue = source.Run_As_User,
+                    NewValue = target.Run_As_User
+                });
+            }
+
+            if (source.Schedule != target.Schedule)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Schedule),
+                    OldValue = source.Schedule,
+                    NewValue = target.Schedule
+                });
+            }
+
+            if (source.Schedule_Type != target.Schedule_Type)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Schedule_Type),
+                    OldValue = source.Schedule_Type,
+                    NewValue = target.Schedule_Type
+                });
+            }
+
+            if (source.Scheduled_Task_State != target.Scheduled_Task_State)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Scheduled_Task_State),
+                    OldValue = source.Scheduled_Task_State,
+                    NewValue = target.Scheduled_Task_State
+                });
+            }
+
+            if (source.Start_In != target.Start_In)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Start_In),
+                    OldValue = source.Start_In,
+                    NewValue = target.Start_In
+                });
+            }
+
+            if (source.Start_Date != target.Start_Date)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Start_Date),
+                    OldValue = source.Start_Date,
+                    NewValue = target.Start_Date
+                });
+            }
+
+            if (source.Start_Time != target.Start_Time)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Start_Time),
+                    OldValue = source.Start_Time,
+                    NewValue = target.Start_Time
+                });
+            }
+
+            if (source.Status != target.Status)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Status),
+                    OldValue = source.Status,
+                    NewValue = target.Status
+                });
+            }
+
+            if (source.Stop_Task_If_Runs_X_Hours_and_X_Mins != target.Stop_Task_If_Runs_X_Hours_and_X_Mins)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Stop_Task_If_Runs_X_Hours_and_X_Mins),
+                    OldValue = source.Stop_Task_If_Runs_X_Hours_and_X_Mins,
+                    NewValue = target.Stop_Task_If_Runs_X_Hours_and_X_Mins
+                });
+            }
+
+            if (source.Task_To_Run != target.Task_To_Run)
+            {
+                changes.Add(new TaskChange()
+                {
+                    HostName = source.HostName,
+                    TaskName = source.TaskName,
+                    PropertyName = nameof(source.Task_To_Run),
+                    OldValue = source.Task_To_Run,
+                    NewValue = target.Task_To_Run
+                });
+            }
+
+            if (includeModified)
+            {
+                if (source.Modified != target.Modified)
+                {
+                    changes.Add(new TaskChange()
+                    {
+                        HostName = source.HostName,
+                        TaskName = source.TaskName,
+                        PropertyName = nameof(source.Modified),
+                        OldValue = source.Modified.ToString(),
+                        NewValue = target.Modified.ToString()
+                    });
+                }
+            }
+
+            return true;
         }
     }
 }

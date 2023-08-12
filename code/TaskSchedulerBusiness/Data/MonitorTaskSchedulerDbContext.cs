@@ -10,8 +10,8 @@ namespace TaskSchedulerBusiness.Data
     public class MonitorTaskSchedulerDbContext:DbContext
     {
         public DbSet<Model.Task> Tasks { get; set; }
-        public DbSet<Model.TaskHistory> TasksHistory { get; set; }
-        public DbSet<Model.TaskChanges> TasksChanges { get; set; }
+        public DbSet<Model.TaskHistory> TaskHistories { get; set; }
+        public DbSet<Model.TaskChange> TaskChanges { get; set; }
 
         public MonitorTaskSchedulerDbContext() : base()
         {
@@ -27,7 +27,7 @@ namespace TaskSchedulerBusiness.Data
         {
             modelBuilder.Entity<Model.Task>().ToTable("Task");
             modelBuilder.Entity<Model.TaskHistory>().ToTable("TaskHistory");
-            modelBuilder.Entity<Model.TaskChanges>().ToTable("TaskChanges");
+            modelBuilder.Entity<Model.TaskChange>().ToTable("TaskChanges");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

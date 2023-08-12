@@ -32,6 +32,9 @@ if(tasks.Count == 0)
 foreach (var task in tasks)
 {
     Console.WriteLine(task.TaskName);
-    TaskSchedulerBusiness.Manager.Save(task);
+    bool succeeded = TaskSchedulerBusiness.Manager.Save(task, out string message);
+
+    Console.WriteLine($"Save result: {succeeded} - {message}");
+
 }
 
