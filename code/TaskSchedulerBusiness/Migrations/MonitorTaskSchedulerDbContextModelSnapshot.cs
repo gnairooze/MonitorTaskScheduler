@@ -25,12 +25,12 @@ namespace TaskSchedulerBusiness.Migrations
             modelBuilder.Entity("TaskSchedulerBusiness.Model.Task", b =>
                 {
                     b.Property<string>("HostName")
-                        .HasMaxLength(700)
-                        .HasColumnType("nvarchar(700)");
-
-                    b.Property<string>("TaskName")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("TaskName")
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -226,8 +226,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("HostName")
                         .IsRequired()
-                        .HasMaxLength(700)
-                        .HasColumnType("nvarchar(700)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Idle_Time")
                         .IsRequired()
@@ -314,8 +314,8 @@ namespace TaskSchedulerBusiness.Migrations
 
                     b.Property<string>("TaskName")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("Task_To_Run")
                         .IsRequired()

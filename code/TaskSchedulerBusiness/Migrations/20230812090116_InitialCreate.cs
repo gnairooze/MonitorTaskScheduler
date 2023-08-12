@@ -15,8 +15,8 @@ namespace TaskSchedulerBusiness.Migrations
                 name: "Task",
                 columns: table => new
                 {
-                    HostName = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
-                    TaskName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    HostName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TaskName = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     Next_Run_Time = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Logon_Mode = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -76,8 +76,8 @@ namespace TaskSchedulerBusiness.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HostName = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
-                    TaskName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    HostName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TaskName = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     Next_Run_Time = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Logon_Mode = table.Column<string>(type: "nvarchar(max)", nullable: false),

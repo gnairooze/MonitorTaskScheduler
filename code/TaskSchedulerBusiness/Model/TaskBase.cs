@@ -10,9 +10,9 @@ namespace TaskSchedulerBusiness.Model
     public class TaskBase
     {
         #region Properties
-        [MaxLength(700)]
-        public string HostName { get; set; } = string.Empty;
         [MaxLength(200)]
+        public string HostName { get; set; } = string.Empty;
+        [MaxLength(700)]
         public string TaskName { get; set; } = string.Empty;
         public string Next_Run_Time { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
