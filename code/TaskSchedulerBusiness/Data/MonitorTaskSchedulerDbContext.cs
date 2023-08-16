@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +34,14 @@ namespace TaskSchedulerBusiness.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;TrustServerCertificate=True;");
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile("appsettings.json");
+            IConfiguration Configuration = builder.Build();
+
+            optionsBuilder.UseSqlServer(
+                Configuration.GetConnectionString("MonitorTaskSchedulerDbConnection"));
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

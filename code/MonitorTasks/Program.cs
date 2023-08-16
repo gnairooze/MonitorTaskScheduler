@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TaskSchedulerBusiness.Data;
 
@@ -8,18 +7,9 @@ var tasksFilePath = @"sched-tasks.csv";
 
 var configBuilder = new ConfigurationBuilder().AddJsonFile($"appsettings.json");
 
-var config = configBuilder.Build();
+var _ = configBuilder.Build();
 
-//not working
-var connectionString = config.GetConnectionString("MonitorTaskSchedulerDbConnection");
-//var connectionString = "Server=.\\Dev;initial catalog=MonitorTaskScheduler;Integrated Security=true;MultipleActiveResultSets=true;App=MonitorTasksConsole;";
-
-var dbOptions = new DbContextOptionsBuilder<MonitorTaskSchedulerDbContext>()
-    .UseSqlServer(connectionString)
-    .EnableSensitiveDataLogging()
-    .Options;
-
-TaskSchedulerBusiness.Manager.DbContext = new MonitorTaskSchedulerDbContext(dbOptions);
+TaskSchedulerBusiness.Manager.DbContext = new MonitorTaskSchedulerDbContext();
 TaskSchedulerBusiness.Manager.Delete(tasksFilePath);
 TaskSchedulerBusiness.Manager.DumpTasks();
 var tasks = TaskSchedulerBusiness.Manager.Load(tasksFilePath);
